@@ -42,7 +42,9 @@ extern int mountee_started;
 error_t
 start_mountee (node_t * np, char * argz, size_t argz_len, mach_port_t * port);
 
-/* Sets up a proxy node and sets the translator on it.  */
+/* Sets up a proxy node, sets the translator on it, and registers the
+   filesystem published by the translator in the list of merged
+   filesystems.  */
 error_t
 setup_unionmount (void);
 

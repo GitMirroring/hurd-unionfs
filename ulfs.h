@@ -22,7 +22,9 @@
 #ifndef INCLUDED_ULFS_H
 #define INCLUDED_ULFS_H
 
-/* The structure for each registered underlying filesystem.  */
+/* The structure for each registered underlying filesystem.  A null
+   path refers to the underlying filesystem; a path equal to an empty
+   string refers to the filesystem of the mountee.  */
 typedef struct ulfs
 {
   char *path;
@@ -49,7 +51,9 @@ extern unsigned int ulfs_num;
 /* The lock protecting the ulfs data structures.  */
 extern struct mutex ulfs_lock;
 
-/* Register a new underlying filesystem.  */
+/* Register a new underlying filesystem.  A null path refers to the
+   underlying filesystem; a path equal to an empty string refers to
+   the filesystem of the mountee.  */
 error_t ulfs_register (char *path, int flags, int priority);
 
 /* Unregister an underlying filesystem.  */

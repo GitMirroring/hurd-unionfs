@@ -60,7 +60,7 @@ error_t for_each_subdir_priv (char *, error_t (*) (char *, char *, void *),
    FLAGS1; MODE is the mode to user for newly created files.  On
    success, stat the looked up port and store it in *PORT, the
    according stat information are stored in *STAT.  */
-error_t file_lookup (file_t dir, char *name, int flags0, int flags1, int mode,
+error_t file_lookup (file_t dir, const char *name, int flags0, int flags1, int mode,
 		     file_t *port, struct stat *stat);
 
 /* Returns no error if directory.  */

@@ -57,7 +57,7 @@ dir_entries_get (file_t dir, char **dirent_data,
 		 size_t *dirent_data_size, struct dirent ***dirent_list)
 {
   error_t err;
-  size_t data_size;
+  mach_msg_type_number_t data_size;
   int entries_num;
   char *data;
 
@@ -97,20 +97,21 @@ dir_entries_get (file_t dir, char **dirent_data,
    success, stat the looked up port and store it in *PORT, the
    according stat information are stored in *STAT.  */
 error_t
-file_lookup (file_t dir, char *name, int flags0, int flags1,
+file_lookup (file_t dir, const char *name, int flags0, int flags1,
 	     int mode, file_t *port, struct stat *stat)
 {
   error_t err = 0;
   file_t p;
   struct stat s;
 
-  file_t do_file_lookup (file_t d, char *n, int f, int m)
+  file_t do_file_lookup (file_t d, const char *n, int f, int m)
     {
       if (port_valid (d))
-	p = file_name_lookup_under (d, n, f, m);
+	return file_name_lookup_under (d, n, f, m);
       else if (errno == EACCES)
-	p = file_name_lookup (n, f, m);
-      return p;
+	return file_name_lookup (n, f, m);
+      else
+	return port_null;
     }
 
   p = do_file_lookup (dir, name, flags0, mode);

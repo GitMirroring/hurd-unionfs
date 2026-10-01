@@ -82,20 +82,20 @@ error_t node_update (node_t *node);
 
 /* Create a directory named NAME beneath DIR on all the (writable) underlying
    filesystems.  */
-error_t node_dir_create (node_t *dir, char *name, mode_t mode);
+error_t node_dir_create (node_t *dir, const char *name, mode_t mode);
 
 /* Remove all directory named NAME beneath DIR on all underlying filesystems.
    Fails if we cannot remove all the directories.  */
-error_t node_dir_remove (node_t *dir, char *name);
+error_t node_dir_remove (node_t *dir, const char *name);
 
 /* Remove all files named NAME beneath DIR on the underlying filesystems
    with FLAGS as openflags.  */
-error_t node_unlink_file (node_t *dir, char *name);
+error_t node_unlink_file (node_t *dir, const char *name);
 
 /* Lookup a file named NAME beneath DIR on the underlying filesystems
    with FLAGS as openflags.  Return the first port successfully looked
    up in *PORT and according stat information in *STAT.  */
-error_t node_lookup_file (node_t *dir, char *name, int flags,
+error_t node_lookup_file (node_t *dir, const char *name, int flags,
 			  file_t *port, struct stat *stat);
 
 /* Initialize per-ulfs data structures for NODE.  The ulfs_lock must

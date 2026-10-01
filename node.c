@@ -185,7 +185,7 @@ node_update (node_t *node)
 /* Remove all directory named NAME beneath DIR on all underlying filesystems.
    Fails if we cannot remove all the directories.  */
 error_t
-node_dir_remove (node_t *dir, char *name)
+node_dir_remove (node_t *dir, const char *name)
 {
   error_t err = 0;
 
@@ -205,7 +205,7 @@ node_dir_remove (node_t *dir, char *name)
 /* Create a directory named NAME beneath DIR on the first (writable) underlying
    filesystem.  */
 error_t
-node_dir_create (node_t *dir, char *name, mode_t mode)
+node_dir_create (node_t *dir, const char *name, mode_t mode)
 {
   error_t err = 0;
 
@@ -226,7 +226,7 @@ node_dir_create (node_t *dir, char *name, mode_t mode)
 /* Remove all files named NAME beneath DIR on the underlying filesystems
    with FLAGS as openflags.  */
 error_t
-node_unlink_file (node_t *dir, char *name)
+node_unlink_file (node_t *dir, const char *name)
 {
   mach_port_t p;
   struct stat stat;
@@ -278,7 +278,7 @@ node_unlink_file (node_t *dir, char *name)
    with FLAGS as openflags.  Return the first port successfully looked
    up in *PORT and according stat information in *STAT.  */
 error_t
-node_lookup_file (node_t *dir, char *name, int flags,
+node_lookup_file (node_t *dir, const char *name, int flags,
 		  file_t *port, struct stat *s)
 {
   error_t err = ENOENT;
